@@ -1,0 +1,14 @@
+/home/igor/RiderProjects/WebApplication3GraphQL/WebApplication3GraphQL/bin/Debug/netcoreapp2.2/WebApplication3GraphQL.deps.json
+/home/igor/RiderProjects/WebApplication3GraphQL/WebApplication3GraphQL/bin/Debug/netcoreapp2.2/WebApplication3GraphQL.runtimeconfig.json
+/home/igor/RiderProjects/WebApplication3GraphQL/WebApplication3GraphQL/bin/Debug/netcoreapp2.2/WebApplication3GraphQL.runtimeconfig.dev.json
+/home/igor/RiderProjects/WebApplication3GraphQL/WebApplication3GraphQL/bin/Debug/netcoreapp2.2/WebApplication3GraphQL.dll
+/home/igor/RiderProjects/WebApplication3GraphQL/WebApplication3GraphQL/bin/Debug/netcoreapp2.2/WebApplication3GraphQL.pdb
+/home/igor/RiderProjects/WebApplication3GraphQL/WebApplication3GraphQL/obj/Debug/netcoreapp2.2/WebApplication3GraphQL.csprojAssemblyReference.cache
+/home/igor/RiderProjects/WebApplication3GraphQL/WebApplication3GraphQL/obj/Debug/netcoreapp2.2/WebApplication3GraphQL.csproj.CoreCompileInputs.cache
+/home/igor/RiderProjects/WebApplication3GraphQL/WebApplication3GraphQL/obj/Debug/netcoreapp2.2/WebApplication3GraphQL.RazorAssemblyInfo.cache
+/home/igor/RiderProjects/WebApplication3GraphQL/WebApplication3GraphQL/obj/Debug/netcoreapp2.2/WebApplication3GraphQL.RazorAssemblyInfo.cs
+/home/igor/RiderProjects/WebApplication3GraphQL/WebApplication3GraphQL/obj/Debug/netcoreapp2.2/WebApplication3GraphQL.AssemblyInfoInputs.cache
+/home/igor/RiderProjects/WebApplication3GraphQL/WebApplication3GraphQL/obj/Debug/netcoreapp2.2/WebApplication3GraphQL.AssemblyInfo.cs
+/home/igor/RiderProjects/WebApplication3GraphQL/WebApplication3GraphQL/obj/Debug/netcoreapp2.2/WebApplication3GraphQL.RazorTargetAssemblyInfo.cache
+/home/igor/RiderProjects/WebApplication3GraphQL/WebApplication3GraphQL/obj/Debug/netcoreapp2.2/WebApplication3GraphQL.dll
+/home/igor/RiderProjects/WebApplication3GraphQL/WebApplication3GraphQL/obj/Debug/netcoreapp2.2/WebApplication3GraphQL.pdb

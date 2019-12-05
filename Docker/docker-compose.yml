@@ -1,0 +1,36 @@
+version: "3"
+
+networks:
+  graghQLApp:
+    driver: bridge
+
+services:
+  
+  # The Application 
+  app:
+    build:
+      context: .
+      dockerfile: ./App/Dockerfile
+    ports:
+      - "9000:80"
+    depends_on:
+      - database
+    networks:
+      - graghQLApp
+  
+  # The Database
+  database:
+    image: mysql:5.7
+    volumes:
+      - dbdata:/var/lib/mysql
+    environment:
+      - "MYSQL_ROOT_PASSWORD=AHtCmBQ4S6zyZfUf"
+      - "MYSQL_DATABASE=test"
+      - "MYSQL_USER=root"
+    ports:
+      - "33062:3306"
+    networks:
+      - graghQLApp
+    
+volumes:
+  dbdata:
