@@ -11,7 +11,7 @@ namespace WebApplication3GraphQL.GraphQL.Mutations
     {
         public UsersMutation(IUsersService usersService)
         {
-            Field<UsersType>("addUser", arguments: new QueryArguments(
+            Field<UsersType>("AddUser", arguments: new QueryArguments(
                     new QueryArgument<UsersInputType>() {Name = "user"}
                 ),
                 resolve: context =>

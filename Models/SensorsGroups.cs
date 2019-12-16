@@ -12,6 +12,10 @@ namespace WebApplication3GraphQL.Models
 
         public Users User { get; set; }
         
+        
+        [Column("user_id")]
+        public int UserId { get; set; }
+        
         public virtual ICollection<GroupSensors> SensorDatases { get; set; }
 
     }

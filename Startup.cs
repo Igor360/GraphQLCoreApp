@@ -15,7 +15,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using WebApplication3GraphQL.GraphQL.Inputs;
+using WebApplication3GraphQL.GraphQL.Mutations;
+using WebApplication3GraphQL.GraphQL.Queries;
 using WebApplication3GraphQL.GraphQL.Schemas;
+using WebApplication3GraphQL.GraphQL.Types;
+using WebApplication3GraphQL.Models;
 using WebApplication3GraphQL.Repositories;
 using WebApplication3GraphQL.Services;
 using AppContext = WebApplication3GraphQL.Contexts.AppContext;
@@ -40,7 +45,20 @@ namespace WebApplication3GraphQL
                     options.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSession();
             services.AddScoped<IUsersRepository, UsersRepository>();
+            services.AddScoped<ISensorsGroupsRepository, SensorGroupsRepository>();
+            services.AddScoped<ISensorDatasRepository, SensorDatasRepository>();
             services.AddScoped<IUsersService, UsersService>();
+            services.AddScoped<ISensorGroupsService, SensorGroupsService>();
+            services.AddScoped<ISensorDatasService, SensorDatasService>();
+            
+            services.AddScoped<UsersSchema>();
+            services.AddScoped<SensorGroupsSchema>();
+            services.AddScoped<SensorDatasSchema>();
+            
+//            services.AddScoped<UsersInputType>();
+//            services.AddScoped<UsersMutation>();
+//            services.AddScoped<UsersType>();
+//            services.AddScoped<UsersQuery>();
             services.AddGraphQL(opt =>
             {
                 opt.EnableMetrics = true;
@@ -61,7 +79,12 @@ namespace WebApplication3GraphQL
                 app.UseHsts();
             }
 
-            app.UseGraphQL<UsersSchema>("/graphql");
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
+            app.UseGraphQL<UsersSchema>("/graphql/user");
+            app.UseGraphQL<SensorGroupsSchema>("/graphql/groups");
+            app.UseGraphQL<SensorDatasSchema>("/graphql/data");
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
             {
                 Path = "/ui/playground"
@@ -69,8 +92,9 @@ namespace WebApplication3GraphQL
             app.UseGraphiQLServer(new GraphiQLOptions
             {
                 GraphiQLPath = "/ui/graphiql",
-                GraphQLEndPoint = "/graphql"
+                GraphQLEndPoint = "/graphql/user"
             });
+            app.UseMvc();
         }
     }
 }

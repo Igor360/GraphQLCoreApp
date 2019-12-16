@@ -38,5 +38,7 @@ namespace WebApplication3GraphQL.Models
         
         [Column("token")]
         public String Token { get; set; }
+
+        public SensorsGroups SensorsGroups { get; set; }
     }
 }

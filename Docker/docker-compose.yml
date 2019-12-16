@@ -9,11 +9,13 @@ services:
   # The Application 
   app:
     build:
-      context: .
-      dockerfile: ./App/Dockerfile
+      context: ..
+      dockerfile: ./Docker/App/Dockerfile
     ports:
-      - "9000:80"
+      - "5000:5000"
     depends_on:
+      - database
+    links:
       - database
     networks:
       - graghQLApp

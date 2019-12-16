@@ -13,6 +13,7 @@ namespace WebApplication3GraphQL.GraphQL.Types
             Field(x => x.FirstName);
             Field(x => x.LastName);
             Field(x => x.Token);
+//            Field(x => x.SensorsGroups);
         }
     }
 }

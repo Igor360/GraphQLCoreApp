@@ -8,7 +8,7 @@ namespace WebApplication3GraphQL.GraphQL.Queries
     {
         public UsersQuery(IUsersService usersService)
         {
-            Field<ListGraphType<UsersType>>("users", resolve: context => usersService.All());
+            Field<ListGraphType<UsersType>>("Users", resolve: context => usersService.All());
         }
     }
 }
