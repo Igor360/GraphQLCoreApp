@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using GraphQL.Server;
 using GraphQL.Server.Ui.GraphiQL;
 using GraphQL.Server.Ui.Playground;
 using GraphQL.Types;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -15,11 +18,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using WebApplication3GraphQL.GraphQL.Inputs;
 using WebApplication3GraphQL.GraphQL.Mutations;
 using WebApplication3GraphQL.GraphQL.Queries;
 using WebApplication3GraphQL.GraphQL.Schemas;
 using WebApplication3GraphQL.GraphQL.Types;
+using WebApplication3GraphQL.Helpers;
+using WebApplication3GraphQL.Mappings;
 using WebApplication3GraphQL.Models;
 using WebApplication3GraphQL.Repositories;
 using WebApplication3GraphQL.Services;
@@ -43,22 +49,44 @@ namespace WebApplication3GraphQL
             services.AddEntityFrameworkSqlServer()
                 .AddDbContext<AppContext>(options =>
                     options.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
+
+            var appSettingSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingSection);
+
+//            var appSettings = appSettingSection.Get<AppSettings>();
+//            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+//            services.AddAuthentication(x =>
+//                {
+//                    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//                    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//                })
+//                .AddJwtBearer(x =>
+//                    {
+//                        x.RequireHttpsMetadata = false;
+//                        x.SaveToken = true;
+//                        x.TokenValidationParameters = new TokenValidationParameters
+//                        {
+//                            ValidateIssuerSigningKey = true,
+//                            IssuerSigningKey = new SymmetricSecurityKey(key),
+//                            ValidateIssuer = false,
+//                            ValidateAudience = false
+//                        };
+//                    }
+//                );
+
+            services.AddAutoMapper(typeof(MapperProfile));
             services.AddSession();
-            services.AddScoped<IUsersRepository, UsersRepository>();
-            services.AddScoped<ISensorsGroupsRepository, SensorGroupsRepository>();
-            services.AddScoped<ISensorDatasRepository, SensorDatasRepository>();
-            services.AddScoped<IUsersService, UsersService>();
-            services.AddScoped<ISensorGroupsService, SensorGroupsService>();
-            services.AddScoped<ISensorDatasService, SensorDatasService>();
-            
-            services.AddScoped<UsersSchema>();
-            services.AddScoped<SensorGroupsSchema>();
-            services.AddScoped<SensorDatasSchema>();
-            
-//            services.AddScoped<UsersInputType>();
-//            services.AddScoped<UsersMutation>();
-//            services.AddScoped<UsersType>();
-//            services.AddScoped<UsersQuery>();
+            services.AddTransient<IUsersRepository, UsersRepository>();
+            services.AddTransient<ISensorsGroupsRepository, SensorGroupsRepository>();
+            services.AddTransient<ISensorDatasRepository, SensorDatasRepository>();
+            services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<ISensorGroupsService, SensorGroupsService>();
+            services.AddTransient<ISensorDatasService, SensorDatasService>();
+
+            services.AddTransient<UsersSchema>();
+            services.AddTransient<SensorGroupsSchema>();
+            services.AddTransient<SensorDatasSchema>();
+
             services.AddGraphQL(opt =>
             {
                 opt.EnableMetrics = true;
@@ -87,12 +115,13 @@ namespace WebApplication3GraphQL
             app.UseGraphQL<SensorDatasSchema>("/graphql/data");
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
             {
-                Path = "/ui/playground"
+                Path = "/ui/playground",
+                GraphQLEndPoint = "/graphql/user"
             });
             app.UseGraphiQLServer(new GraphiQLOptions
             {
                 GraphiQLPath = "/ui/graphiql",
-                GraphQLEndPoint = "/graphql/user"
+                GraphQLEndPoint = "/graphql"
             });
             app.UseMvc();
         }

@@ -8,7 +8,7 @@ namespace WebApplication3GraphQL.Repositories
 {
     public class AbstractRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        private readonly DbContext _context;
+        protected readonly DbContext _context;
 
         public AbstractRepository(AppContext dbContext)
         {

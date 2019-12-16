@@ -6,11 +6,11 @@ namespace WebApplication3GraphQL.GraphQL.Inputs
     {
         public UsersInputType()
         {
-            Field<StringGraphType>("Username");
-            Field<StringGraphType>("Email");
-            Field<StringGraphType>("Password");
-            Field<StringGraphType>("FirstName");
-            Field<StringGraphType>("LastName");
+            Field<NonNullGraphType<StringGraphType>>("Username");
+            Field<NonNullGraphType<StringGraphType>>("Email");
+            Field<NonNullGraphType<StringGraphType>>("Password");
+            Field<NonNullGraphType<StringGraphType>>("FirstName");
+            Field<NonNullGraphType<StringGraphType>>("LastName");
         }
     }
 }

@@ -6,6 +6,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="9.0.0" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
         <PackageReference Include="GraphQL" Version="2.4.0" />
         <PackageReference Include="GraphQL.Common" Version="1.0.3" />
         <PackageReference Include="GraphQL.Server" Version="1.7.0.1" />

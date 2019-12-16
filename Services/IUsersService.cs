@@ -6,5 +6,8 @@ namespace WebApplication3GraphQL.Services
     public interface IUsersService : IService<Users>
     {
         Users RegisterUser(UserRequest user);
+        
+        Users Authenticate(string username, string password);
+
     }
 }
